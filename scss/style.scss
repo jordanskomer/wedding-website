@@ -1,0 +1,58 @@
+// Imports
+@import "skeleton/skeleton";
+@import "utilities";
+@import "variables";
+
+
+html {
+  background-color: grey;
+  // background: url(http://www.mrwallpaper.com/wallpapers/valley-forest-panorama-1920x1080.jpg) no-repeat center center fixed;
+  // -webkit-background-size: cover;
+  // -moz-background-size: cover;
+  // -o-background-size: cover;
+  // background-size: cover;
+}
+
+header {
+  height: 50px;
+  line-height: 50px;
+  vertical-align: center;
+  padding: 0 15px;
+
+  .logo {
+    float: left;
+  }
+
+  a {
+    margin-left: 10px;
+    cursor: pointer;
+    float: right;
+    color: white;
+
+    &:hover {
+      color: $blue;
+    }
+  }
+}
+
+.main {
+
+  #heart {
+    width: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+h5 {
+  background: white;
+}
+
+.form {
+  h5 {
+    color: grey;
+  }
+}
+
