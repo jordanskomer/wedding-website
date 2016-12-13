@@ -2,11 +2,14 @@
 var express = require('express');
 var app = express();
 var path = require('path');
+var bodyParser = require("body-parser");
 
 
 // views as directory for all template files
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 // instruct express to server up static assets
 app.use(express.static('public'));
 
@@ -20,8 +23,7 @@ app.get('/rsvp', function(req, res) {
 });
 
 app.post('/rsvp', function(req, res) {
-  console.log(res);
-  res.render('index');
+  console.log(req);
 });
 // Set server port
 app.listen(4000);

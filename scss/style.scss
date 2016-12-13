@@ -1,41 +1,84 @@
 // Imports
-@import "skeleton/skeleton";
 @import "utilities";
 @import "variables";
+@import url('https://fonts.googleapis.com/css?family=Satisfy');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 
 html {
-  background-color: grey;
-  // background: url(http://www.mrwallpaper.com/wallpapers/valley-forest-panorama-1920x1080.jpg) no-repeat center center fixed;
-  // -webkit-background-size: cover;
-  // -moz-background-size: cover;
-  // -o-background-size: cover;
-  // background-size: cover;
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
 }
 
 header {
-  height: 50px;
-  line-height: 50px;
-  vertical-align: center;
-  padding: 0 15px;
+  width: 100%;
+  height: $header-height;
+  line-height: $header-height;
+  text-align: center;
+  display: inline-block;
+  background-color: white;
+  z-index: 999;
 
-  .logo {
+  .header-link {
+    width: 150px;
+    margin: 0 20px;
     float: left;
   }
 
   a {
-    margin-left: 10px;
-    cursor: pointer;
-    float: right;
-    color: white;
+    color: black;
+    text-decoration: none;
 
     &:hover {
-      color: $blue;
+      color: black;
+    }
+    &:hover + .underline {
+      opacity: 1;
+    }
+  }
+
+  .underline {
+    pointer-events: none;
+    margin-top: -45px;
+    opacity: 0;
+    @include transition(opacity .4s);
+
+    &.active {
+      opacity: 1;
     }
   }
 }
 
+.sticky-wrapper {
+  height: $header-height;
+}
+
+.stuck {
+  position:fixed;
+  top:0;
+}
+
 .main {
+  background-image: url("../assets/bg.jpg");
+  background-size: cover;
+  height: 800px;
+
+  i {
+    color: white;
+    font-size: 1.25rem;
+  }
+
+  span {
+    font-size: .75rem;
+    color: white;
+  }
 
   #heart {
     width: 50%;
@@ -46,13 +89,174 @@ header {
   }
 }
 
-h5 {
-  background: white;
+#our-story {
+  height: auto;
+  background-color: white;
+  padding: $header-height $margin;
+
+  .heading {
+    text-align: center;
+  }
+
+  p {
+    span {
+      font-size: 4rem;
+    }
+  }
 }
 
-.form {
-  h5 {
-    color: grey;
+
+.header {
+  @extend .Satisfy;
+  text-align: center;
+  font-size: 2rem;
+
+  object {
+    margin-top: -25px;
+    width: 200px;
   }
+}
+
+#info {
+  position: relative;
+  width: 100%;
+  height: 1100px;
+  background-color: $light-gray;
+  padding-bottom: 50px;
+
+  .header {
+    text-align: center;
+    height: 200px;
+    line-height: 200px;
+
+    h1 {
+      margin: 0;
+    }
+  }
+
+
+  .timeline {
+    margin-left: (100%-(14*6))/2;
+    height: 400px;
+    width: 100%;
+
+    .text {
+      width: 10%;
+      text-align: center;
+      float: left;
+      z-index: 9;
+      margin: 0 2%;
+
+      .time {
+        font-size: 1.25rem;
+      }
+
+      .time-text {
+        @extend .Satisfy;
+        margin: 10px 5px;
+        font-size: 1.75rem;
+        line-height: 30px;
+      }
+    }
+  }
+
+  #map {
+    position: absolute;
+    width: 100%;
+    height: 500px;
+    float: left;
+    background-color: gray;
+  }
+
+  .details {
+    @extend .center;
+    width: 100%;
+    position: absolute;
+    margin-top: 325px;
+    z-index: 9;
+
+    .fa-caret-left {
+      font-size: 6rem;
+      color: white;
+      position: absolute;
+      margin: 175px 0 0 -30px;
+    }
+
+    .text {
+      float: right;
+      margin-right: 25%;
+      width: 300px;
+      padding-bottom: 20px;
+      background-color: white;
+
+      .image {
+        background-image: url("../assets/thistle_hill.jpg");
+        width: 300px;
+        height: 175px
+      }
+
+      a {
+        color: black;
+        text-decoration: none;
+        padding: 0 20px;
+        margin-bottom: 20px;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      h5 {
+        text-transform: uppercase;
+        padding: 0 20px;
+        margin: 20px 0 10px 0;
+      }
+
+      p {
+        padding: 0 20px;
+        margin: 25px 0;
+        font-size: .75rem;
+        color: $gray;
+      }
+
+      h4 {
+        position: absolute;
+        margin-top: -40px;
+        text-transform: uppercase;
+
+        a {
+          color: white;
+
+          &:hover {
+            color: white;
+          }
+        }
+
+      }
+    }
+  }
+}
+
+#rsvp {
+  height: auto;
+  background-color: yellow;
+  padding: $header-height $margin;
+}
+
+#registry {
+  height: 500px;
+  background-color: blue;
+  padding: $header-height $margin;
+}
+
+#gallery {
+  height: 1080px;
+  background-color: grey;
+  padding: $header-height $margin;
+}
+
+.active {
+  text-decoration: none;
+  color: black;
 }
 
