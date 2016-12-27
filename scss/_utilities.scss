@@ -2,35 +2,52 @@
   display: none;
 }
 
-@mixin transition($transition...) {
-    -moz-transition:    $transition;
-    -o-transition:      $transition;
-    -webkit-transition: $transition;
-    transition:         $transition;
+// Usage:   @include transition(width, height 0.3s ease-in-out);
+// Output:  -webkit-transition(width 0.2s, height 0.3s ease-in-out);
+//          transition(width 0.2s, height 0.3s ease-in-out);
+//
+// Pass in any number of transitions
+@mixin transition($transitions...) {
+  $unfoldedTransitions: ();
+  @each $transition in $transitions {
+    $unfoldedTransitions: append($unfoldedTransitions, unfoldTransition($transition), comma);
+  }
+
+  -webkit-transition: $unfoldedTransitions;
+  transition: $unfoldedTransitions;
 }
-@mixin transition-property($property...) {
-    -moz-transition-property:    $property;
-    -o-transition-property:      $property;
-    -webkit-transition-property: $property;
-    transition-property:         $property;
+
+@function unfoldTransition ($transition) {
+  // Default values
+  $property: all;
+  $duration: .2s;
+  $easing: null; // Browser default is ease, which is what we want
+  $delay: null; // Browser default is 0, which is what we want
+  $defaultProperties: ($property, $duration, $easing, $delay);
+
+  // Grab transition properties if they exist
+  $unfoldedTransition: ();
+  @for $i from 1 through length($defaultProperties) {
+    $p: null;
+    @if $i <= length($transition) {
+      $p: nth($transition, $i)
+    } @else {
+      $p: nth($defaultProperties, $i)
+    }
+    $unfoldedTransition: append($unfoldedTransition, $p);
+  }
+
+  @return $unfoldedTransition;
 }
-@mixin transition-duration($duration...) {
-    -moz-transition-property:    $duration;
-    -o-transition-property:      $duration;
-    -webkit-transition-property: $duration;
-    transition-property:         $duration;
+
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
 }
-@mixin transition-timing-function($timing...) {
-    -moz-transition-timing-function:    $timing;
-    -o-transition-timing-function:      $timing;
-    -webkit-transition-timing-function: $timing;
-    transition-timing-function:         $timing;
-}
-@mixin transition-delay($delay...) {
-    -moz-transition-delay:    $delay;
-    -o-transition-delay:      $delay;
-    -webkit-transition-delay: $delay;
-    transition-delay:         $delay;
+
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
 }
 
 .center {
@@ -39,10 +56,13 @@
   transform: translate(-50%, -50%);
 }
 
-.Satisfy {
-  font-family: 'Satisfy', cursive;
+.Montserrat {
+  font-family: 'Montserrat', sans-serif;
 }
 
+.PT-Serif {
+  font-family: 'PT Serif', serif;
+}
 p {
   margin-left: -55px;
 }

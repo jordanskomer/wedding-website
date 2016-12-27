@@ -1,15 +1,17 @@
-@import url("https://fonts.googleapis.com/css?family=Satisfy");
-@import url("https://fonts.googleapis.com/css?family=Montserrat");
+@import url("https://fonts.googleapis.com/css?family=Montserrat|PT+Serif:400i");
 .hidden {
   display: none; }
 
-.center, #info .details {
+.center {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); }
 
-.Satisfy, .header, #info .timeline .text .time-text {
-  font-family: 'Satisfy', cursive; }
+.Montserrat, header, .header-title, #rsvp .form .form-content label, #rsvp .form .form-content .controls {
+  font-family: 'Montserrat', sans-serif; }
+
+.PT-Serif, #rsvp .form .form-content .button, #rsvp .form .form-content input {
+  font-family: 'PT Serif', serif; }
 
 p {
   margin-left: -55px; }
@@ -22,34 +24,40 @@ html {
 
 body {
   margin: 0;
-  font-family: 'Montserrat', sans-serif; }
+  font-family: 'PT Serif', serif; }
 
 header {
-  width: 100%;
-  height: 80px;
-  line-height: 80px;
-  text-align: center;
-  display: inline-block;
+  position: fixed;
+  width: 20%;
+  height: 100%;
   background-color: white;
-  z-index: 999; }
+  z-index: 999;
+  padding-top: 40px;
+  vertical-align: middle; }
   header .header-link {
-    width: 150px;
-    margin: 0 20px;
-    float: left; }
-  header a {
-    color: black;
-    text-decoration: none; }
-    header a:hover {
-      color: black; }
-    header a:hover + .underline {
+    position: relative;
+    padding-left: 20%;
+    margin: 75px 0;
+    letter-spacing: 3px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 10px;
+    font-size: 0.625rem; }
+    header .header-link:hover > .underline {
       opacity: 1; }
-  header .underline {
-    pointer-events: none;
-    margin-top: -45px;
-    opacity: 0;
-    transition: opacity 0.4s; }
-    header .underline.active {
-      opacity: 1; }
+    header .header-link a {
+      color: black;
+      text-decoration: none; }
+    header .header-link .underline {
+      position: absolute;
+      width: 65%;
+      margin-left: -5%;
+      margin-top: 10px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s; }
+      header .header-link .underline.active {
+        opacity: 1; }
 
 .sticky-wrapper {
   height: 80px; }
@@ -58,133 +66,297 @@ header {
   position: fixed;
   top: 0; }
 
-.main {
-  background-image: url("../assets/bg.jpg");
-  background-size: cover;
-  height: 800px; }
-  .main i {
-    color: white;
-    font-size: 1.25rem; }
-  .main span {
-    font-size: .75rem;
-    color: white; }
-  .main #heart {
-    width: 50%;
+.quote {
+  margin: 0 10%; }
+
+.clear-header {
+  margin-left: 20%; }
+
+#main {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; }
+  #main img {
+    width: 100%;
+    height: 100vh;
+    object-position: top center;
+    object-fit: cover; }
+  #main .js-text {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); }
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    width: 55%;
+    object-fit: contain;
+    object-position: center center;
+    transition: opacity 1s ease-in-out; }
+
+.header-title {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 10px;
+  padding: 85px 0;
+  margin: 0;
+  font-size: 36px;
+  font-size: 2.25rem; }
 
 #our-story {
-  height: auto;
   background-color: white;
-  padding: 80px 250px; }
-  #our-story .heading {
-    text-align: center; }
-  #our-story p span {
-    font-size: 4rem; }
+  padding-bottom: 100px; }
+  #our-story p {
+    margin: 0 15%; }
 
-.header {
-  text-align: center;
-  font-size: 2rem; }
-  .header object {
-    margin-top: -25px;
-    width: 200px; }
-
-#info {
-  position: relative;
-  width: 100%;
-  height: 1100px;
-  background-color: #EBEBEB;
-  padding-bottom: 50px; }
-  #info .header {
-    text-align: center;
-    height: 200px;
-    line-height: 200px; }
-    #info .header h1 {
-      margin: 0; }
-  #info .timeline {
-    margin-left: 8%;
-    height: 400px;
-    width: 100%; }
-    #info .timeline .text {
-      width: 10%;
-      text-align: center;
-      float: left;
-      z-index: 9;
-      margin: 0 2%; }
-      #info .timeline .text .time {
-        font-size: 1.25rem; }
-      #info .timeline .text .time-text {
-        margin: 10px 5px;
-        font-size: 1.75rem;
-        line-height: 30px; }
-  #info #map {
-    position: absolute;
-    width: 100%;
-    height: 500px;
-    float: left;
-    background-color: gray; }
-  #info .details {
-    width: 100%;
-    position: absolute;
-    margin-top: 325px;
-    z-index: 9; }
-    #info .details .fa-caret-left {
-      font-size: 6rem;
-      color: white;
-      position: absolute;
-      margin: 175px 0 0 -30px; }
-    #info .details .text {
-      float: right;
-      margin-right: 25%;
-      width: 300px;
-      padding-bottom: 20px;
-      background-color: white; }
-      #info .details .text .image {
-        background-image: url("../assets/thistle_hill.jpg");
-        width: 300px;
-        height: 175px; }
-      #info .details .text a {
-        color: black;
-        text-decoration: none;
-        padding: 0 20px;
-        margin-bottom: 20px; }
-        #info .details .text a:hover {
-          text-decoration: underline; }
-      #info .details .text h5 {
-        text-transform: uppercase;
-        padding: 0 20px;
-        margin: 20px 0 10px 0; }
-      #info .details .text p {
-        padding: 0 20px;
-        margin: 25px 0;
-        font-size: .75rem;
-        color: #B4B4B4; }
-      #info .details .text h4 {
-        position: absolute;
-        margin-top: -40px;
-        text-transform: uppercase; }
-        #info .details .text h4 a {
-          color: white; }
-          #info .details .text h4 a:hover {
-            color: white; }
+.parallax {
+  background-position: center center;
+  background-size: cover;
+  filter: grayscale(100%);
+  height: 650px; }
+  .parallax.rsvp {
+    background-image: url("../assets/bg-3.jpg"); }
 
 #rsvp {
-  height: auto;
-  background-color: yellow;
-  padding: 80px 250px; }
+  position: relative;
+  height: 425px;
+  text-align: center;
+  background-color: #333333;
+  transition: all 0.5s ease-in-out; }
+  #rsvp.completed {
+    height: 250px; }
+    #rsvp.completed .header-title {
+      opacity: 0; }
+  #rsvp .header-title {
+    color: #ffffff;
+    margin: 0;
+    transition: all 0.5s ease-in-out; }
+    #rsvp .header-title.hide {
+      opacity: 0; }
+  #rsvp .form-submit-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    opacity: 0;
+    font-size: 48px;
+    font-size: 3rem;
+    transition: opacity 0.5s ease-in-out; }
+    #rsvp .form-submit-text.active {
+      opacity: 1; }
+  #rsvp .form .form-content {
+    display: none;
+    position: relative; }
+    #rsvp .form .form-content.active {
+      display: inline-block;
+      width: 45%; }
+    #rsvp .form .form-content .buttons {
+      width: 100%;
+      display: inline-block; }
+    #rsvp .form .form-content .button {
+      position: relative;
+      color: white;
+      width: 45%;
+      margin-right: 11%;
+      letter-spacing: 2px;
+      background: none;
+      padding: 20px 40px;
+      margin: 15px 2%;
+      border: 3px solid #ffffff; }
+      #rsvp .form .form-content .button:last-child {
+        margin-right: 0; }
+      #rsvp .form .form-content .button:focus {
+        outline: none; }
+      #rsvp .form .form-content .button.js-attending {
+        width: 26%; }
+        #rsvp .form .form-content .button.js-attending:last-child {
+          margin-right: 0; }
+    #rsvp .form .form-content label {
+      position: absolute;
+      margin-top: 25px;
+      margin-left: 25px;
+      letter-spacing: 3.5px;
+      color: white;
+      font-size: 12px;
+      font-size: 0.75rem;
+      transition: all 0.1s ease; }
+      #rsvp .form .form-content label.active {
+        margin-top: -15px;
+        font-size: 10px;
+        font-size: 0.625rem; }
+    #rsvp .form .form-content input {
+      width: 100%;
+      padding: 10px 25px;
+      color: white;
+      margin-bottom: 10px;
+      border: none;
+      border-bottom: 1px solid #ffffff;
+      background: none;
+      font-size: 26px;
+      font-size: 1.625rem; }
+      #rsvp .form .form-content input:focus {
+        outline: none; }
+    #rsvp .form .form-content .controls {
+      float: right;
+      text-transform: lowercase;
+      letter-spacing: 3.5px;
+      margin-right: 20px;
+      cursor: pointer;
+      color: #ffffff;
+      font-size: 10px;
+      font-size: 0.625rem; }
+
+#details {
+  width: 100%; }
+  #details #map {
+    width: 100%;
+    height: 200px; }
+  #details .wedding-details, #details .hotel-details {
+    background-color: #ffffff;
+    color: black;
+    width: 100%; }
+    #details .wedding-details .header-title, #details .hotel-details .header-title {
+      padding-top: 40px 0 0 0; }
+  #details .details {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+        flex-direction: row;
+    margin: 0 15%; }
+    #details .details .column {
+      width: 50%; }
+      #details .details .column:first-child {
+        margin-right: 10%; }
+  #details .wedding-details .name {
+    padding: 25px 0; }
+  #details .hotel-details {
+    margin-bottom: 100px; }
 
 #registry {
-  height: 500px;
-  background-color: blue;
-  padding: 80px 250px; }
+  text-align: center;
+  color: white;
+  height: 400px;
+  background-color: #333333; }
+  #registry a {
+    text-decoration: none; }
+  #registry .bg {
+    height: 500px;
+    width: 100%;
+    margin-bottom: 100px; }
+  #registry .text {
+    width: 40%;
+    z-index: 999;
+    margin: 80px 0; }
+  #registry .store {
+    cursor: pointer;
+    width: 20%;
+    fill: #ffffff;
+    margin: 0 50px;
+    transition: fill 0.2s ease; }
+    #registry .store:hover {
+      fill: #B4B4B4; }
 
 #gallery {
-  height: 1080px;
-  background-color: grey;
-  padding: 80px 250px; }
+  padding: 20px; }
+  #gallery .js-gallery-modal-trigger {
+    cursor: pointer;
+    height: 100%;
+    width: 100%; }
+  #gallery .image {
+    opacity: 0;
+    width: 100%;
+    padding: 20px;
+    transition: opacity 1.75s ease-in-out; }
+
+#js-gallery-modal {
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  pointer-events: none;
+  position: absolute;
+  opacity: 0;
+  transition: opacity 1s ease-in-out; }
+  #js-gallery-modal.active {
+    opacity: 0.6; }
 
 .active {
   text-decoration: none;
   color: black; }
+
+@media screen and (max-width: 768px) {
+  header {
+    display: none; }
+
+  .header-title {
+    padding: 50px 0; }
+
+  .clear-header {
+    margin: 0; }
+
+  #main img {
+    height: 60vh; }
+  #main .js-text {
+    width: 80%; }
+
+  #our-story p {
+    margin: 0 10%; }
+
+  #rsvp .form .form-content.active {
+    width: 80%; }
+  #rsvp .form .form-content label {
+    font-size: 18px;
+    margin-top: 15px;
+    margin-left: 15px; }
+  #rsvp .form .form-content input {
+    font-size: 24px;
+    padding-left: 15px; }
+  #rsvp .form .form-content .controls {
+    font-size: 16px; }
+  #rsvp .form .form-content .button {
+    margin: 15px 5px;
+    padding: 15px 50px; }
+
+  #details .details {
+    margin: 0 10%;
+    display: inline-block; }
+    #details .details .column {
+      margin: 0;
+      width: 100%;
+      margin-bottom: 50px; }
+
+  #registry {
+    height: 600px; }
+    #registry .store {
+      width: 55%; } }
+#grid[data-columns]::before {
+  content: '3 .column.size-1of3'; }
+
+/* These are the classes that are going to be applied: */
+.column {
+  float: left; }
+
+.size-1of3 {
+  width: 33.333%; }
+
+@media screen and (max-width: 480px) {
+  #grid[data-columns]::before {
+    content: '1 .column.size-1of1'; } }
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  #grid[data-columns]::before {
+    content: '2 .column.size-1of2'; } }
+@media screen and (min-width: 769px) {
+  #grid[data-columns]::before {
+    content: '3 .column.size-1of3'; } }
+.column {
+  float: left; }
+
+.size-1of1 {
+  width: 100%; }
+
+.size-1of2 {
+  width: 50%; }
+
+.size-1of3 {
+  width: 33.333%; }

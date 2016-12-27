@@ -1,8 +1,7 @@
-// Imports
+  // Imports
 @import "utilities";
 @import "variables";
-@import url('https://fonts.googleapis.com/css?family=Satisfy');
-@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Montserrat|PT+Serif:400i');
 
 
 html {
@@ -14,44 +13,49 @@ html {
 
 body {
   margin: 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'PT Serif', serif;
 }
 
 header {
-  width: 100%;
-  height: $header-height;
-  line-height: $header-height;
-  text-align: center;
-  display: inline-block;
+  @extend .Montserrat;
+  position: fixed;
+  width: $header-width;
+  height: 100%;
   background-color: white;
   z-index: 999;
+  padding-top: 40px;
+  vertical-align: middle;
 
   .header-link {
-    width: 150px;
-    margin: 0 20px;
-    float: left;
-  }
+    position: relative;
+    padding-left: 20%;
+    margin: 75px 0;
+    letter-spacing: 3px;
+    cursor: pointer;
+    text-transform: uppercase;
+    @include font-size(10px);
 
-  a {
-    color: black;
-    text-decoration: none;
+    &:hover > .underline {
+      opacity: 1;
+    }
 
-    &:hover {
+    a {
       color: black;
+      text-decoration: none;
     }
-    &:hover + .underline {
-      opacity: 1;
-    }
-  }
 
-  .underline {
-    pointer-events: none;
-    margin-top: -45px;
-    opacity: 0;
-    @include transition(opacity .4s);
+    .underline {
+      position: absolute;
+      width: 65%;
+      margin-left: -5%;
+      margin-top: 10px;
+      pointer-events: none;
+      opacity: 0;
+      @include transition(opacity .4s);
 
-    &.active {
-      opacity: 1;
+      &.active {
+        opacity: 1;
+      }
     }
   }
 }
@@ -65,198 +69,425 @@ header {
   top:0;
 }
 
-.main {
-  background-image: url("../assets/bg.jpg");
-  background-size: cover;
-  height: 800px;
+.quote {
+  margin: 0 10%;
+}
 
-  i {
-    color: white;
-    font-size: 1.25rem;
+.clear-header {
+  margin-left: $header-width;
+}
+
+#main {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  img {
+    width: 100%;
+    height: 100vh;
+    object-position: top center;
+    object-fit: cover;
   }
 
-  span {
-    font-size: .75rem;
-    color: white;
-  }
-
-  #heart {
-    width: 50%;
+  .js-text {
     position: absolute;
     top: 50%;
     left: 50%;
+    opacity: 0;
     transform: translate(-50%, -50%);
+    width: 55%;
+    object-fit: contain;
+    object-position: center center;
+    @include transition(opacity 1s ease-in-out);
   }
+}
+
+.header-title {
+  @extend .Montserrat;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 10px;
+  padding: 85px 0;
+  margin: 0;
+  @include font-size(36px);
 }
 
 #our-story {
-  height: auto;
   background-color: white;
-  padding: $header-height $margin;
-
-  .heading {
-    text-align: center;
-  }
+  padding-bottom: 100px;
 
   p {
-    span {
-      font-size: 4rem;
-    }
+    margin: 0 $margin;
   }
 }
 
+.parallax {
+  background-position: center center;
+  background-size: cover;
+  filter: grayscale(100%);
+  height: 650px;
 
-.header {
-  @extend .Satisfy;
-  text-align: center;
-  font-size: 2rem;
-
-  object {
-    margin-top: -25px;
-    width: 200px;
-  }
-}
-
-#info {
-  position: relative;
-  width: 100%;
-  height: 1100px;
-  background-color: $light-gray;
-  padding-bottom: 50px;
-
-  .header {
-    text-align: center;
-    height: 200px;
-    line-height: 200px;
-
-    h1 {
-      margin: 0;
-    }
-  }
-
-
-  .timeline {
-    margin-left: (100%-(14*6))/2;
-    height: 400px;
-    width: 100%;
-
-    .text {
-      width: 10%;
-      text-align: center;
-      float: left;
-      z-index: 9;
-      margin: 0 2%;
-
-      .time {
-        font-size: 1.25rem;
-      }
-
-      .time-text {
-        @extend .Satisfy;
-        margin: 10px 5px;
-        font-size: 1.75rem;
-        line-height: 30px;
-      }
-    }
-  }
-
-  #map {
-    position: absolute;
-    width: 100%;
-    height: 500px;
-    float: left;
-    background-color: gray;
-  }
-
-  .details {
-    @extend .center;
-    width: 100%;
-    position: absolute;
-    margin-top: 325px;
-    z-index: 9;
-
-    .fa-caret-left {
-      font-size: 6rem;
-      color: white;
-      position: absolute;
-      margin: 175px 0 0 -30px;
-    }
-
-    .text {
-      float: right;
-      margin-right: 25%;
-      width: 300px;
-      padding-bottom: 20px;
-      background-color: white;
-
-      .image {
-        background-image: url("../assets/thistle_hill.jpg");
-        width: 300px;
-        height: 175px
-      }
-
-      a {
-        color: black;
-        text-decoration: none;
-        padding: 0 20px;
-        margin-bottom: 20px;
-
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-
-      h5 {
-        text-transform: uppercase;
-        padding: 0 20px;
-        margin: 20px 0 10px 0;
-      }
-
-      p {
-        padding: 0 20px;
-        margin: 25px 0;
-        font-size: .75rem;
-        color: $gray;
-      }
-
-      h4 {
-        position: absolute;
-        margin-top: -40px;
-        text-transform: uppercase;
-
-        a {
-          color: white;
-
-          &:hover {
-            color: white;
-          }
-        }
-
-      }
-    }
+  &.rsvp {
+    background-image: url("../assets/bg-3.jpg");
   }
 }
 
 #rsvp {
-  height: auto;
-  background-color: yellow;
-  padding: $header-height $margin;
+  position: relative;
+  height: 425px;
+  text-align: center;
+  background-color: $dark-gray;
+  @include transition(all 0.5s ease-in-out);
+
+  &.completed {
+    height: 250px;
+    .header-title {
+      opacity: 0;
+    }
+  }
+
+  .header-title {
+    color: $white;
+    margin: 0;
+    @include transition(all 0.5s ease-in-out);
+
+    &.hide {
+      opacity: 0;
+    }
+  }
+
+  .form-submit-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: $white;
+    opacity: 0;
+    @include font-size(48px);
+    @include transition(opacity 0.5s ease-in-out);
+
+    &.active {
+      opacity: 1;
+    }
+  }
+
+  .form {
+
+    .form-content {
+      display: none;
+      position: relative;
+
+      &.active {
+        display: inline-block;
+        width: 45%;
+      }
+
+      .buttons {
+        width: 100%;
+        display: inline-block;
+      }
+
+      .button {
+        @extend .PT-Serif;
+        position: relative;
+        color: white;
+        width: 45%;
+        margin-right: 11%;
+        letter-spacing: 2px;
+        background: none;
+        padding: 20px 40px;
+        margin: 15px 2%;
+        border: 3px solid $white;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        &:focus {
+          outline: none;
+        }
+
+        &.js-attending {
+          width: 26%;
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+
+      label {
+        @extend .Montserrat;
+        position: absolute;
+        margin-top: 25px;
+        margin-left: 25px;
+        letter-spacing: 3.5px;
+        color: white;
+        @include font-size(12px);
+        @include transition(all 0.1s ease);
+
+        &.active {
+          margin-top: -15px;
+          @include font-size(10px);
+        }
+      }
+
+      input {
+        @extend .PT-Serif;
+        width: 100%;
+        padding: 10px 25px;
+        color: white;
+        margin-bottom: 10px;
+        border: none;
+        border-bottom: 1px solid $white;
+        background: none;
+        @include font-size(26px);
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      .controls {
+        @extend .Montserrat;
+        float: right;
+        text-transform: lowercase;
+        letter-spacing: 3.5px;
+        margin-right: 20px;
+        cursor: pointer;
+        color: $white;
+        @include font-size(10px);
+      }
+    }
+  }
+}
+
+#details {
+  width: 100%;
+
+  #map {
+    width: 100%;
+    height: 200px;
+  }
+
+  .wedding-details, .hotel-details {
+    background-color: $white;
+    color: black;
+    width: 100%;
+
+    .header-title {
+      padding-top: 40px 0 0 0;
+    }
+  }
+
+  .details {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    margin: 0 $margin;
+
+    .column {
+      width: 50%;
+
+      &:first-child {
+        margin-right: 10%;
+      }
+    }
+  }
+
+  .wedding-details {
+    .name {
+      padding: 25px 0;
+    }
+  }
+
+  .hotel-details {
+    margin-bottom: 100px;
+  }
 }
 
 #registry {
-  height: 500px;
-  background-color: blue;
-  padding: $header-height $margin;
+  text-align: center;
+  color: white;
+  height: 400px;
+  background-color: $dark-gray;
+
+  a {
+    text-decoration: none;
+  }
+
+  .bg {
+    height: 500px;
+    width: 100%;
+    margin-bottom: 100px;
+  }
+
+  .text {
+    width: 40%;
+    z-index: 999;
+    margin: 80px 0;
+  }
+
+  .store {
+    cursor: pointer;
+    width: 20%;
+    fill: $white;
+    margin: 0 50px;
+    @include transition(fill 0.2s ease);
+
+    &:hover {
+      fill: $gray;
+    }
+  }
 }
 
 #gallery {
-  height: 1080px;
-  background-color: grey;
-  padding: $header-height $margin;
+  padding: 20px;
+
+  .js-gallery-modal-trigger {
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+  }
+
+  .image {
+    opacity: 0;
+    width: 100%;
+    padding: 20px;
+    @include transition(opacity 1.75s ease-in-out);
+  }
+}
+
+#js-gallery-modal {
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  pointer-events: none;
+  position: absolute;
+  opacity: 0;
+  @include transition(opacity 1s ease-in-out);
+  &.active {
+    opacity: 0.6;
+  }
 }
 
 .active {
   text-decoration: none;
   color: black;
 }
+
+@media screen and (max-width: 768px) {
+  header {
+    display: none;
+  }
+
+  .header-title {
+    padding: 50px 0;
+  }
+  .clear-header {
+    margin: 0;
+  }
+
+  #main {
+
+    img {
+      height: 60vh;
+    }
+
+    .js-text {
+      width: 80%;
+    }
+  }
+
+  #our-story p {
+    margin: 0 10%;
+  }
+
+  #rsvp .form .form-content {
+    &.active {
+      width: 80%;
+    }
+
+    label {
+      font-size: 18px;
+      margin-top: 15px;
+      margin-left: 15px;
+    }
+
+    input {
+      font-size: 24px;
+      padding-left: 15px;
+    }
+
+    .controls {
+      font-size: 16px ;
+    }
+
+    .button {
+      margin: 15px 5px;
+      padding: 15px 50px;
+
+    }
+  }
+
+  #details .details {
+    margin: 0 10%;
+    display: inline-block;
+
+    .column {
+      margin: 0;
+      width: 100%;
+      margin-bottom: 50px;
+    }
+  }
+
+  #registry {
+    height: 600px;
+    .store {
+      width: 55%;
+    }
+  }
+}
+
+// -------------------------
+// Salvattore
+// -------------------------
+
+#grid[data-columns]::before {
+  content: '3 .column.size-1of3';
+}
+
+/* These are the classes that are going to be applied: */
+.column { float: left; }
+.size-1of3 { width: 33.333%; }
+
+
+
+
+@media screen and (max-width: 480px){
+  #grid[data-columns]::before {
+    content: '1 .column.size-1of1';
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  #grid[data-columns]::before {
+    content: '2 .column.size-1of2';
+  }
+}
+@media screen and (min-width: 769px) {
+  #grid[data-columns]::before {
+    content: '3 .column.size-1of3';
+  }
+}
+
+// /* Again, you’re free to use and define the classes: */
+.column { float: left; }
+.size-1of1 { width: 100%; }
+.size-1of2 { width: 50%; }
+.size-1of3 { width: 33.333%; }
 

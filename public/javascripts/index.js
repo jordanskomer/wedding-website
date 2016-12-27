@@ -1,292 +1,161 @@
 $(document).ready(function(){
-  animateSVGs();
-  initMap();
-  var sticky = new Waypoint.Sticky({
-    element: $('header')[0]
+
+  setupHeaderUnderlines();
+
+  // setupGalleryGrid();
+
+  $(".image, .js-text").unveil(0, function() {
+    $(this).load(function() {
+      this.style.opacity = 1;
+    });
   });
+
+  $(".js-gallery-modal-trigger").click(function(){
+    $("#js-gallery-modal").addClass("active");
+  });
+
+  $(".form-input").keydown(function(e) {
+      if(e.which == 13 || e.which == 9) {
+        e.preventDefault();
+        if($(this).attr("name") == "sig_last_name"){
+          submitForm();
+        } else {
+          nextFormInput();
+        }
+      }
+  });
+
+  $(".form-input").focus(function(e) {
+    $("label[for='" + $(this).attr("name") + "']").addClass("active");
+  });
+
+  $(".js-next").click(function(){
+    if ($(".form-input.active").val() != "") {
+      nextFormInput();
+    } else {
+      $("label[for='" + $(".form-input.active").attr("name") + "']").text("Please fill in this field");
+    }
+  });
+
+  $(".js-prev").click(function(){
+    prevFormInput();
+  });
+
+  $("#going-yes").click(function(e){
+    e.preventDefault();
+    $("#js-going").val("yes");
+    nextFormInput();
+  });
+
+  $("#going-no").click(function(e){
+    e.preventDefault();
+    $("#js-going").val("no");
+    submitForm();
+  });
+
+  $(".js-attending").click(function(e) {
+    e.preventDefault();
+    $("#js-attending").val($(this).data("value"));
+    submitForm();
+  })
 
   $("a").click(function(){
     removeUnderlines();
     $(this).next().addClass("active");
-    $("#" + $(this).data("link")).goTo();
   });
 
+  $(".js-reveal").on("click", function(){
+    $(this).addClass("active");
+    $("#mobile-nav").addClass("active");
+  });
 
-  // new Waypoint({
-  //   element: document.getElementById('our-story'),
-  //   handler: function(dir) {
-  //     if (dir == 'down') {
-  //       removeUnderlines();
-  //       $('.underline').eq(0).addClass("active");
-  //     }
-  //   },
-  //   offset: 75
-  // });
-  // new Waypoint({
-  //   element: document.getElementById('info'),
-  //   handler: function(dir) {
-  //     if (dir == 'down') {
-  //       removeUnderlines();
-  //       $('.underline').eq(1).addClass("active");
-  //     }
-  //   },
-  //   offset: 80
-  // });
-  // new Waypoint({
-  //   element: document.getElementById('rsvp'),
-  //   handler: function(dir) {
-  //     if (dir == 'down') {
-  //       removeUnderlines();
-  //       $('.underline').eq(2).addClass("active");
-  //     }
-  //   },
-  //   offset: 80
-  // });
-  // new Waypoint({
-  //   element: document.getElementById('registry'),
-  //   handler: function(dir) {
-  //     if (dir == 'down') {
-  //       removeUnderlines();
-  //       $('.underline').eq(3).addClass("active");
-  //     }
-  //   },
-  //   offset: 80
-  // });
-  // new Waypoint({
-  //   element: document.getElementById('gallery'),
-  //   handler: function(dir) {
-  //     if (dir == 'down') {
-  //       removeUnderlines();
-  //       $('.underline').eq(4).addClass("active");
-  //     }
-  //   },
-  //   offset: 80
-  // });
+  $(".js-nav-link").on("click", function() {
+    $("#mobile-nav").removeClass("active");
+    $(".js-reveal").removeClass("active");
+    document.querySelector("#" + this.dataset.link).scrollIntoView({ behavior: 'smooth' });
+  });
+
+  $('.header-link').on('click', function() {
+    document.querySelector("#" + this.firstElementChild.dataset.link).scrollIntoView({ behavior: 'smooth' });
+  });
 });
 
-(function($) {
-    $.fn.goTo = function() {
-        $('html, body').animate({
-            scrollTop: ($(this).offset().top - 80) + 'px'
-        }, 'fast');
-        return this;
-    }
-})(jQuery);
+var setupHeaderUnderlines = function() {
+  var controller = new ScrollMagic.Controller();
+
+  var ourStoryDuration = document.getElementById('our-story').clientHeight,
+      rsvpDuration = document.getElementById('rsvp').clientHeight,
+      detailsDuration = document.getElementById('details').clientHeight,
+      registryDuration = document.getElementById('registry').clientHeight
+
+
+  var ourStoryScene = new ScrollMagic.Scene({
+      triggerElement: "#our-story",
+      duration: ourStoryDuration
+  }).setClassToggle("#our-story-underline", "active").addTo(controller);
+
+  var scene = new ScrollMagic.Scene({
+      triggerElement: "#rsvp",
+      duration: rsvpDuration
+  }).setClassToggle("#rsvp-underline", "active").addTo(controller);
+
+  var scene = new ScrollMagic.Scene({
+      triggerElement: "#details",
+      duration: detailsDuration
+  }).setClassToggle("#details-underline", "active").addTo(controller);
+
+  var scene = new ScrollMagic.Scene({
+      triggerElement: "#registry",
+      duration: registryDuration
+  }).setClassToggle("#registry-underline", "active").addTo(controller);
+
+  var scene = new ScrollMagic.Scene({
+      triggerElement: "#gallery",
+  }).setClassToggle("#gallery-underline", "active").addTo(controller);
+};
+
+var setupGalleryGrid = function() {
+  $(".grid").boxify();
+};
+
+var submitForm = function() {
+  $("#rsvp").addClass("completed");
+  $("#rsvp .header-title").addClass("hide");
+  $('.form-submit-text').text("Thanks!");
+  $(".form-content.active").removeClass("active");
+  $('.form-submit-text').addClass("active");
+  postForm();
+};
 
 var removeUnderlines = function() {
   $('.underline').removeClass("active");
 };
 
-var initMap = function() {
-  var thistle_hill = {lat: 32.737900, lng: -97.342419};
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 16,
-    center: {lat: 32.739001, lng: -97.342430},
-    disableDefaultUI: true,
-    clickableIcons: true,
-    scrollwheel: false,
-    styles: [
-      {
-        "elementType": "geometry",
-        "stylers": [
-          {
-            "color": "#f5f5f5"
-          }
-        ]
-      },
-      {
-        "elementType": "labels.icon",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "elementType": "labels.text.fill",
-        "stylers": [
-          {
-            "color": "#616161"
-          }
-        ]
-      },
-      {
-        "elementType": "labels.text.stroke",
-        "stylers": [
-          {
-            "color": "#f5f5f5"
-          }
-        ]
-      },
-      {
-        "featureType": "administrative.land_parcel",
-        "elementType": "labels.text.fill",
-        "stylers": [
-          {
-            "color": "#bdbdbd"
-          }
-        ]
-      },
-      {
-        "featureType": "poi",
-        "elementType": "geometry",
-        "stylers": [
-          {
-            "color": "#eeeeee"
-          }
-        ]
-      },
-      {
-        "featureType": "poi",
-        "elementType": "labels.text.fill",
-        "stylers": [
-          {
-            "color": "#757575"
-          }
-        ]
-      },
-      {
-        "featureType": "poi.park",
-        "elementType": "geometry",
-        "stylers": [
-          {
-            "color": "#e5e5e5"
-          }
-        ]
-      },
-      {
-        "featureType": "poi.park",
-        "elementType": "labels.text.fill",
-        "stylers": [
-          {
-            "color": "#9e9e9e"
-          }
-        ]
-      },
-      {
-        "featureType": "road",
-        "elementType": "geometry",
-        "stylers": [
-          {
-            "color": "#ffffff"
-          }
-        ]
-      },
-      {
-        "featureType": "road",
-        "elementType": "labels.text.stroke",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "road.arterial",
-        "elementType": "labels.text.fill",
-        "stylers": [
-          {
-            "color": "#757575"
-          }
-        ]
-      },
-      {
-        "featureType": "road.highway",
-        "elementType": "geometry",
-        "stylers": [
-          {
-            "color": "#dadada"
-          }
-        ]
-      },
-      {
-        "featureType": "road.highway",
-        "elementType": "geometry.fill",
-        "stylers": [
-          {
-            "color": "#a5e2ff"
-          }
-        ]
-      },
-      {
-        "featureType": "road.highway",
-        "elementType": "geometry.stroke",
-        "stylers": [
-          {
-            "color": "#a5e2ff"
-          }
-        ]
-      },
-      {
-        "featureType": "road.highway",
-        "elementType": "labels.text.fill",
-        "stylers": [
-          {
-            "color": "#616161"
-          }
-        ]
-      },
-      {
-        "featureType": "road.local",
-        "elementType": "labels.text.fill",
-        "stylers": [
-          {
-            "color": "#9e9e9e"
-          }
-        ]
-      },
-      {
-        "featureType": "transit.line",
-        "elementType": "geometry",
-        "stylers": [
-          {
-            "color": "#e5e5e5"
-          }
-        ]
-      },
-      {
-        "featureType": "transit.station",
-        "elementType": "geometry",
-        "stylers": [
-          {
-            "color": "#eeeeee"
-          }
-        ]
-      },
-      {
-        "featureType": "water",
-        "elementType": "geometry",
-        "stylers": [
-          {
-            "color": "#c9c9c9"
-          }
-        ]
-      },
-      {
-        "featureType": "water",
-        "elementType": "labels.text.fill",
-        "stylers": [
-          {
-            "color": "#9e9e9e"
-          }
-        ]
-      }
-    ]
-  });
-  var marker = new google.maps.Marker({
-    position: thistle_hill,
-    map: map
+var postForm = function() {
+  $.ajax({
+    type: "POST",
+    url: "/",
+    timeout: 2000,
+    data: $(".form").serializeArray()
   });
 };
 
+var nextFormInput = function() {
+  currentForm = $(".form-content.active");
+  currentForm.removeClass("active");
+  if (!currentForm.next().is("button")) {
+    currentForm.next().addClass("active");
+    currentForm.next().children()[1].focus();
+  } else {
+    submitForm();
+  }
+};
 
-var vivuscallback = function(){};
-
-var animateSVGs = function() {
-  new Vivus('heart', {
-    start: 'autostart',
-    type: 'oneByOne',
-    duration: 250,
-    animTimingFunction: Vivus.EASE_OUT
-  }, vivuscallback);
+var prevFormInput = function() {
+  currentForm = $(".form-content.active");
+  if (currentForm.prev().length != 0) {
+    currentForm.removeClass("active");
+    currentForm.prev().addClass("active");
+    currentForm.prev().children()[1].focus();
+  }
 };

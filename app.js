@@ -2,6 +2,7 @@
 var express = require('express');
 var app = express();
 var path = require('path');
+const fs = require('fs');
 var bodyParser = require("body-parser");
 
 
@@ -18,13 +19,22 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
-app.get('/rsvp', function(req, res) {
-  res.render('rsvp');
-});
-
-app.post('/rsvp', function(req, res) {
-  console.log(req);
+app.post('/', function(req, res) {
+  fs.readFile('rsvps.json', function (err, data) {
+    var json = JSON.parse(data);
+    json.push(req.body);
+    fs.writeFile("rsvps.json", JSON.stringify(json), function(err) {
+      if(err) {
+          return console.log(err);
+      }
+      console.log("--------------------------")
+      console.log("RSVP Submitted")
+      console.log("--------------------------")
+      console.log(req.body)
+      console.log("--------------------------")
+    });
+  });
 });
 // Set server port
 app.listen(4000);
-console.log('server is running');
+console.log('Website Running on Port 4000');
