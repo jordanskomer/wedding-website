@@ -1,67 +1,57 @@
 $(document).ready(function(){
-  animateSVGs();
+  // animateSVGs();
   initMap();
-  var sticky = new Waypoint.Sticky({
-    element: $('header')[0]
-  });
 
   $("a").click(function(){
     removeUnderlines();
     $(this).next().addClass("active");
-    $("#" + $(this).data("link")).goTo();
   });
 
+  $('.header-link').on('click', function() {
+    document.querySelector("#" + this.firstElementChild.dataset.link).scrollIntoView({ behavior: 'smooth' });
+  });
 
-  // new Waypoint({
-  //   element: document.getElementById('our-story'),
-  //   handler: function(dir) {
-  //     if (dir == 'down') {
-  //       removeUnderlines();
-  //       $('.underline').eq(0).addClass("active");
-  //     }
-  //   },
-  //   offset: 75
-  // });
-  // new Waypoint({
-  //   element: document.getElementById('info'),
-  //   handler: function(dir) {
-  //     if (dir == 'down') {
-  //       removeUnderlines();
-  //       $('.underline').eq(1).addClass("active");
-  //     }
-  //   },
-  //   offset: 80
-  // });
-  // new Waypoint({
-  //   element: document.getElementById('rsvp'),
-  //   handler: function(dir) {
-  //     if (dir == 'down') {
-  //       removeUnderlines();
-  //       $('.underline').eq(2).addClass("active");
-  //     }
-  //   },
-  //   offset: 80
-  // });
-  // new Waypoint({
-  //   element: document.getElementById('registry'),
-  //   handler: function(dir) {
-  //     if (dir == 'down') {
-  //       removeUnderlines();
-  //       $('.underline').eq(3).addClass("active");
-  //     }
-  //   },
-  //   offset: 80
-  // });
-  // new Waypoint({
-  //   element: document.getElementById('gallery'),
-  //   handler: function(dir) {
-  //     if (dir == 'down') {
-  //       removeUnderlines();
-  //       $('.underline').eq(4).addClass("active");
-  //     }
-  //   },
-  //   offset: 80
-  // });
+  new Waypoint.Inview({
+    element: document.getElementById('main'),
+    exit: function(direction) {
+      removeUnderlines();
+    }
+  });
+  new Waypoint.Inview({
+    element: document.getElementById('our-story'),
+    exit: function(direction) {
+      removeUnderlines();
+      $('.underline').eq(0).addClass("active");
+    }
+  });
+  new Waypoint.Inview({
+    element: document.getElementById('rsvp'),
+    exit: function(direction) {
+      removeUnderlines();
+      $('.underline').eq(1).addClass("active");
+    }
+  });
+  new Waypoint.Inview({
+    element: document.getElementById('details'),
+    exit: function(direction) {
+      removeUnderlines();
+      $('.underline').eq(2).addClass("active");
+    }
+  });
+  new Waypoint.Inview({
+    element: document.getElementById('registry'),
+    exit: function(direction) {
+      removeUnderlines();
+      $('.underline').eq(3).addClass("active");
+    }
+  });
+  new Waypoint.Inview({
+    element: document.getElementById('gallery'),
+    exit: function(direction) {
+      removeUnderlines();
+      $('.underline').eq(4).addClass("active");
+    }
+  });
 });
 
 (function($) {
@@ -280,7 +270,6 @@ var initMap = function() {
 };
 
 
-var vivuscallback = function(){};
 
 var animateSVGs = function() {
   new Vivus('heart', {

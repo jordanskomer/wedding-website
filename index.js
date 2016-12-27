@@ -18,11 +18,7 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
-app.get('/rsvp', function(req, res) {
-  res.render('rsvp');
-});
-
-app.post('/rsvp', function(req, res) {
+app.post('/', function(req, res) {
   console.log(req);
 });
 // Set server port
