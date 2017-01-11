@@ -1,15 +1,18 @@
-@import url("https://fonts.googleapis.com/css?family=Satisfy");
-@import url("https://fonts.googleapis.com/css?family=Montserrat");
+@import url(bower_components/aos/dist/aos.css);
+@import url("https://fonts.googleapis.com/css?family=Montserrat|PT+Serif:400i");
 .hidden {
   display: none; }
 
-.center, #main .text {
+.center, #main .text, #rsvp .form-submit-text {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); }
 
-.Satisfy {
-  font-family: 'Satisfy', cursive; }
+.Montserrat, header, .header-title, #rsvp .form .form-content label, #rsvp .form .form-content .controls, #details .venue-details .title {
+  font-family: 'Montserrat', sans-serif; }
+
+.PT-Serif, #rsvp .form .form-content .button, #rsvp .form .form-content input {
+  font-family: 'PT Serif', serif; }
 
 p {
   margin-left: -55px; }
@@ -22,7 +25,7 @@ html {
 
 body {
   margin: 0;
-  font-family: 'Montserrat', sans-serif; }
+  font-family: 'PT Serif', serif; }
 
 header {
   position: fixed;
@@ -31,11 +34,12 @@ header {
   background-color: white;
   z-index: 999;
   padding-left: 80px;
-  padding-top: 3%;
+  padding-top: 40px;
   vertical-align: middle; }
   header .header-link {
     font-size: 10px;
-    margin: 80px 0;
+    font-size: 0.625rem;
+    margin: 60px 0;
     letter-spacing: 3px;
     cursor: pointer;
     text-transform: uppercase; }
@@ -77,43 +81,175 @@ header {
     width: 40%;
     margin-left: 150px; }
 
+.header-title {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 10px;
+  padding: 85px 0 0 0;
+  font-size: 36px;
+  font-size: 2.25rem; }
+
 #our-story {
-  height: 1000px;
   background-color: white;
-  padding: 80px 250px; }
-  #our-story .heading {
-    text-align: center; }
-  #our-story p span {
-    font-size: 4rem; }
+  padding-bottom: 100px; }
+  #our-story .header-title {
+    margin-bottom: 85px; }
+  #our-story p {
+    margin: 0 20%; }
+  #our-story p::first-letter {
+    font-size: 18px;
+    font-size: 1.125rem; }
+
+#rsvp {
+  height: 450px;
+  text-align: center;
+  background-color: #333333;
+  transition: all 0.5s ease-in-out; }
+  #rsvp.completed {
+    height: 450px; }
+    #rsvp.completed .header-title {
+      display: none; }
+  #rsvp .header-title {
+    color: #ffffff; }
+    #rsvp .header-title.hide {
+      opacity: 0; }
+  #rsvp .form-submit-text {
+    position: absolute;
+    color: #ffffff;
+    font-size: 48px;
+    font-size: 3rem; }
+  #rsvp .form {
+    margin-top: 140px; }
+    #rsvp .form .form-content {
+      margin-top: -15px;
+      display: none;
+      position: relative; }
+      #rsvp .form .form-content.active {
+        display: inline-block;
+        width: 45%; }
+      #rsvp .form .form-content .buttons {
+        display: inline-block; }
+      #rsvp .form .form-content .button {
+        color: white;
+        letter-spacing: 2px;
+        background: none;
+        padding: 20px 40px;
+        margin: 15px 20px;
+        border: 3px solid #ffffff; }
+        #rsvp .form .form-content .button:focus {
+          outline: none; }
+      #rsvp .form .form-content label {
+        position: absolute;
+        margin-top: 25px;
+        margin-left: 25px;
+        letter-spacing: 3.5px;
+        color: white;
+        font-size: 12px;
+        font-size: 0.75rem;
+        transition: all 0.1s ease; }
+        #rsvp .form .form-content label.active {
+          margin-top: -15px;
+          font-size: 10px;
+          font-size: 0.625rem; }
+      #rsvp .form .form-content input {
+        width: 100%;
+        padding: 10px 25px;
+        color: white;
+        margin-bottom: 10px;
+        border: none;
+        border-bottom: 1px solid #ffffff;
+        background: none;
+        font-size: 26px;
+        font-size: 1.625rem; }
+        #rsvp .form .form-content input:focus {
+          outline: none; }
+      #rsvp .form .form-content .controls {
+        float: right;
+        text-transform: lowercase;
+        letter-spacing: 3.5px;
+        margin-right: 20px;
+        cursor: pointer;
+        color: #ffffff;
+        font-size: 10px;
+        font-size: 0.625rem; }
+
+.overlay {
+  background-color: black;
+  width: 100%;
+  height: 600px;
+  position: absolute;
+  z-index: 1;
+  opacity: 0.4; }
 
 #details {
   position: relative;
   width: 100%;
-  height: 1100px;
+  height: auto;
   background-color: #EBEBEB;
   padding-bottom: 50px; }
   #details #map {
-    position: absolute;
     width: 100%;
-    height: 500px;
+    height: 600px;
     float: left;
     background-color: gray; }
-
-#rsvp {
-  height: 800px;
-  background-color: yellow;
-  padding: 80px 250px; }
+  #details img {
+    height: 200px;
+    position: absolute; }
+  #details .event-details, #details .venue-details {
+    background-color: black;
+    color: #ffffff;
+    position: absolute;
+    width: 40%;
+    height: 200px;
+    padding: 25px;
+    z-index: 99; }
+  #details .venue-details {
+    width: 40%;
+    height: 200px;
+    padding: 25px;
+    text-align: left; }
+    #details .venue-details .title {
+      letter-spacing: 5px;
+      margin: 20px 0;
+      text-transform: uppercase;
+      font-size: 12px;
+      font-size: 0.75rem; }
 
 #registry {
-  height: 500px;
-  background-color: blue;
-  padding: 80px 250px; }
+  text-align: center;
+  color: white;
+  background-color: #333333; }
+  #registry .bg {
+    height: 500px;
+    width: 100%;
+    margin-bottom: 100px; }
+  #registry .text {
+    width: 40%;
+    z-index: 999;
+    margin: 80px 0; }
+  #registry .store {
+    cursor: pointer;
+    width: 20%;
+    margin: 0 50px; }
+    #registry .store:hover {
+      color: red; }
 
 #gallery {
-  height: 1080px;
-  background-color: grey;
-  padding: 80px 250px; }
+  padding: 20px; }
+  #gallery .image {
+    width: 100%;
+    padding: 20px; }
 
 .active {
   text-decoration: none;
   color: black; }
+
+#grid[data-columns]::before {
+  content: '3 .column.size-1of3'; }
+
+/* These are the classes that are going to be applied: */
+.column {
+  float: left; }
+
+.size-1of3 {
+  width: 33.333%; }
