@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Jordan and Emily Skomer</title>
+  <link href="stylesheets/style.css" rel="stylesheet">
+
+</head>
+<body>
+
+
+  <header>
+    <div class="header-link">
+      <a data-link="our-story">Our Story</a>
+      <div class="underline"><object type="image/svg+xml" data="assets/underline.svg"></object></div>
+    </div>
+    <div class="header-link">
+      <a data-link="rsvp">RSVP</a>
+      <div class="underline"><object type="image/svg+xml" data="assets/underline.svg"></object></div>
+    </div>
+    <div class="header-link">
+      <a data-link="details">Details</a>
+      <div class="underline"><object type="image/svg+xml" data="assets/underline.svg"></object></div>
+    </div>
+    <div class="header-link">
+      <a data-link="registry">Registry</a>
+      <div class="underline"><object type="image/svg+xml" data="assets/underline.svg"></object></div>
+    </div>
+    <div class="header-link">
+      <a data-link="gallery">Gallery</a>
+      <div class="underline"><object type="image/svg+xml" data="assets/underline.svg"></object></div>
+    </div>
+  </header>
+
+  <div class="clear-header">
+
+    <div id="main">
+      <object class="text" type="image/svg+xml" data="assets/text.svg"></object>
+    </div>
+
+    <div id="our-story" class="waypoint">
+      <div class="heading">
+        <h1>Our Story</h1>
+      </div>
+    </div>
+
+
+    <div id="rsvp" class="waypoint">
+      <div class="container form">
+        <div class="heading">
+          <h4>RSVP</h4>
+          <h7>Let us know if you will be attending our</h5>
+        </div>
+        <div class="form-content">
+          <label for="first_name">First Name</label>
+          <input class="u-full-width" type="text" id="first_name">
+        </div>
+        <div class="form-content">
+          <label for="last_name">Last Name</label>
+          <input class="u-full-width" type="text" id="last_name">
+        </div>
+        <div class="form-content">
+          <label for="email_address">Email Address</label>
+          <input class="u-full-width" type="text" id="email_address">
+        </div>
+        <div class="form-content">
+          <label for="going">Will you make it?</label>
+          <select class="u-full-width" type="text" id="going">
+            <option value="0">Yes</option>
+            <option value="1">No</option>
+          </select>
+        </div>
+        <div class="form-content">
+          <label for="plus_one">Will you be bringing a significant other?</label>
+          <select class="u-full-width" type="text" id="plus_one">
+            <option value="0">Yes</option>
+            <option value="1">No</option>
+          </select>
+        </div>
+        <div class="form-content">
+          <label for="sig_first_name">First Name</label>
+          <input class="u-full-width" type="text" id="sig_first_name">
+        </div>
+        <div class="form-content">
+          <label for="sig_last_name">Last Name</label>
+          <input class="u-full-width" type="text" id="sig_last_name">
+        </div>
+
+        <button id="next">next</button>
+        <button id="next">prev</button>
+        <input class="submit button-primary" type="button" value="Submit">
+      </div>
+    </div>
+
+    <div id="details" class="waypoint">
+      <div id="map"></div>
+    </div>
+
+    <div id="registry" class="waypoint">
+
+    </div>
+
+    <div id="gallery" class="waypoint">
+      <div class="grid">
+      </div>
+    </div>
+  </div>
+
+  <%- include('_scripts.ejs') %>
+</body>
+</html>
