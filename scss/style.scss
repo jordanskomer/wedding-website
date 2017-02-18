@@ -60,6 +60,26 @@ header {
   }
 }
 
+#mobile-menu {
+  @extend .Montserrat;
+  position: fixed;
+  z-index: 9999;
+  top: 100%;
+  height: 150px;
+  width: 100%;
+  line-height: 150px;
+  text-align: center;
+  text-transform: uppercase;
+  background-color: white;
+  margin-top: -150px;
+  font-size: 36px;
+
+  a {
+    margin: 0 20px;
+  }
+
+}
+
 .sticky-wrapper {
   height: $header-height;
 }
@@ -120,6 +140,25 @@ header {
 
   p {
     margin: 0 $margin;
+    @include transition(height 1s ease-in-out);
+
+    &.show {
+      height: auto;
+    }
+
+    &.show ~ .view-more {
+      display: none;
+    }
+  }
+
+  .view-more {
+    display: none;
+    position: relative;
+    z-index: 999;
+    width: 100%;
+    line-height: 100px;
+    font-size: 24px;
+    text-align: center;
   }
 }
 
@@ -272,6 +311,18 @@ header {
     height: 200px;
   }
 
+  a {
+    display: inline-block;
+    color: $dark-gray;
+    margin: 5px 0;
+    text-decoration: none;
+    border-bottom: 2px solid $dark-gray;
+
+    &:hover, &:focus {
+      border-color: transparent;
+    }
+  }
+
   .wedding-details, .hotel-details {
     background-color: $white;
     color: black;
@@ -300,8 +351,21 @@ header {
 
   .wedding-details {
     .name {
-      padding: 25px 0;
+      @extend .Montserrat;
+      font-size: 32px;
     }
+    .directions {
+      margin-bottom: 20px;
+    }
+  }
+
+  .hotel-name {
+    @extend .Montserrat;
+    font-size: 32px;
+  }
+
+  .hotel-name, .hotel-phone, .hotel-directions {
+    text-align: right;
   }
 
   .hotel-details {
@@ -380,14 +444,24 @@ header {
   color: black;
 }
 
-@media screen and (max-width: 768px) {
+// -------------------------
+// Salvattore
+// -------------------------
+
+#grid[data-columns]::before {
+  content: '3 .column.size-1of3';
+}
+
+.column { float: left; }
+.size-1of1 { width: 100%; }
+.size-1of2 { width: 50%; }
+.size-1of3 { width: 33.333%; }
+
+@media screen and (max-device-width: 768px) {
   header {
     display: none;
   }
 
-  .header-title {
-    padding: 50px 0;
-  }
   .clear-header {
     margin: 0;
   }
@@ -403,8 +477,27 @@ header {
     }
   }
 
-  #our-story p {
-    margin: 0 10%;
+  #our-story {
+    padding-bottom: 25px;
+
+    p {
+      height: 9.2em;
+      overflow: hidden;
+      margin: 0 10%;
+      font-size: 42px;
+
+      &.show {
+        font-size: 14px;
+        padding-bottom: 150px;
+        &:after {
+          background: none;
+        }
+      }
+    }
+
+    .view-more {
+      display: block;
+    }
   }
 
   #rsvp .form .form-content {
@@ -413,28 +506,39 @@ header {
     }
 
     label {
-      font-size: 18px;
+      font-size: 36px;
       margin-top: 15px;
       margin-left: 15px;
+
+      &.active {
+        margin-top: -25px;
+        font-size: 24px;
+      }
     }
 
     input {
-      font-size: 24px;
+      font-size: 46px;
       padding-left: 15px;
+      border-width: 5px;
     }
 
     .controls {
-      font-size: 16px ;
+      font-size: 32px;
     }
 
     .button {
-      margin: 15px 5px;
+      font-size: 36px;
+      margin: 25px 5px;
       padding: 15px 50px;
 
     }
   }
 
   #details .details {
+    a {
+      font-size: 32px;
+    }
+
     margin: 0 10%;
     display: inline-block;
 
@@ -446,48 +550,15 @@ header {
   }
 
   #registry {
-    height: 600px;
+    height: 1000px;
     .store {
-      width: 55%;
+      width: 40%;
     }
   }
-}
 
-// -------------------------
-// Salvattore
-// -------------------------
-
-#grid[data-columns]::before {
-  content: '3 .column.size-1of3';
-}
-
-/* These are the classes that are going to be applied: */
-.column { float: left; }
-.size-1of3 { width: 33.333%; }
-
-
-
-
-@media screen and (max-width: 480px){
   #grid[data-columns]::before {
     content: '1 .column.size-1of1';
   }
 }
 
-@media screen and (min-width: 481px) and (max-width: 768px) {
-  #grid[data-columns]::before {
-    content: '2 .column.size-1of2';
-  }
-}
-@media screen and (min-width: 769px) {
-  #grid[data-columns]::before {
-    content: '3 .column.size-1of3';
-  }
-}
-
-// /* Again, you’re free to use and define the classes: */
-.column { float: left; }
-.size-1of1 { width: 100%; }
-.size-1of2 { width: 50%; }
-.size-1of3 { width: 33.333%; }
 

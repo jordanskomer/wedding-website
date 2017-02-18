@@ -70,13 +70,16 @@ $(document).ready(function(){
   });
 
   $(".js-nav-link").on("click", function() {
-    $("#mobile-nav").removeClass("active");
     $(".js-reveal").removeClass("active");
     document.querySelector("#" + this.dataset.link).scrollIntoView({ behavior: 'smooth' });
   });
 
   $('.header-link').on('click', function() {
     document.querySelector("#" + this.firstElementChild.dataset.link).scrollIntoView({ behavior: 'smooth' });
+  });
+
+  $(".view-more").click(function() {
+    $("#our-story p").addClass("show");
   });
 });
 
