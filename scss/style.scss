@@ -162,17 +162,6 @@ header {
   }
 }
 
-.parallax {
-  background-position: center center;
-  background-size: cover;
-  filter: grayscale(100%);
-  height: 650px;
-
-  &.rsvp {
-    background-image: url("../assets/bg-3.jpg");
-  }
-}
-
 #rsvp {
   position: relative;
   height: 425px;
