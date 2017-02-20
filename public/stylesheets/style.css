@@ -357,6 +357,7 @@ header {
       margin: 0 10%;
       font-size: 42px; }
       #our-story p.show {
+        font-size: 14px;
         padding-bottom: 150px; }
         #our-story p.show:after {
           background: none; }

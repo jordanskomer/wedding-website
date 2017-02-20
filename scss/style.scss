@@ -456,7 +456,6 @@ header {
   }
 
   #main {
-
     img {
       height: 60vh;
     }
@@ -480,6 +479,7 @@ header {
       font-size: 42px;
 
       &.show {
+        font-size: 14px;
         padding-bottom: 150px;
         &:after {
           background: none;
