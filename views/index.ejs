@@ -30,13 +30,6 @@
     </div>
   </header>
 
-  <!-- <div id="mobile-menu">
-    <a data-link="rsvp">RSVP</a>
-    <a data-link="registry">Registry</a>
-    <a data-link="details">Details</a>
-    <a data-link="gallery">Gallery</a>
-  </div> -->
-
   <div class="clear-header">
 
     <div id="main">
@@ -148,7 +141,9 @@
         } %>
         <!-- Loop through the array -->
         <%arr.forEach(function(i){ %>
+          <a href="./assets/gallery_images/gallery (<%= i %> of 74).jpg" target="_blank">
             <img class="image js-gallery-modal-trigger" data-number="<%= i %>" data-src="../assets/gallery_images/gallery (<%= i %> of 74).jpg">
+          </a>
         <%});%>
       </div>
     </div>

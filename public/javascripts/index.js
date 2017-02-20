@@ -2,16 +2,10 @@ $(document).ready(function(){
 
   setupHeaderUnderlines();
 
-  // setupGalleryGrid();
-
   $(".image, .js-text").unveil(0, function() {
     $(this).load(function() {
       this.style.opacity = 1;
     });
-  });
-
-  $(".js-gallery-modal-trigger").click(function(){
-    $("#js-gallery-modal").addClass("active");
   });
 
   $(".form-input").keydown(function(e) {
