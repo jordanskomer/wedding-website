@@ -346,6 +346,9 @@ header {
   #main .js-text {
     width: 80%; }
 
+  .header-title {
+    font-size: 56px; }
+
   #our-story {
     padding-bottom: 25px; }
     #our-story p {
@@ -354,7 +357,6 @@ header {
       margin: 0 10%;
       font-size: 42px; }
       #our-story p.show {
-        font-size: 14px;
         padding-bottom: 150px; }
         #our-story p.show:after {
           background: none; }

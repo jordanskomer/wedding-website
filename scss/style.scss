@@ -466,6 +466,10 @@ header {
     }
   }
 
+  .header-title {
+    font-size: 56px;
+  }
+
   #our-story {
     padding-bottom: 25px;
 
@@ -476,7 +480,6 @@ header {
       font-size: 42px;
 
       &.show {
-        font-size: 14px;
         padding-bottom: 150px;
         &:after {
           background: none;
