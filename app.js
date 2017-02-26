@@ -23,6 +23,7 @@ app.post('/', function(req, res) {
   fs.readFile('rsvps.json', function (err, data) {
     var json = JSON.parse(data);
     json.push(req.body);
+    console.log(json);
     fs.writeFile("rsvps.json", JSON.stringify(json), function(err) {
       if(err) {
           return console.log(err);
