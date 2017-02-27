@@ -143,10 +143,8 @@ header {
   text-align: center;
   background-color: #333333;
   transition: all 0.5s ease-in-out; }
-  #rsvp.completed {
-    height: 250px; }
-    #rsvp.completed .header-title {
-      opacity: 0; }
+  #rsvp.completed .header-title {
+    opacity: 0; }
   #rsvp .header-title {
     color: #ffffff;
     margin: 0;
