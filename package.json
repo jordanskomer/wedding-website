@@ -20,10 +20,13 @@
   },
   "homepage": "https://github.com/jordanskomer/wedding-website#readme",
   "dependencies": {
+    "basic-auth": "^1.1.0",
     "body-parser": "^1.15.2",
     "ejs": "^2.5.5",
     "express": "^4.14.0",
-    "redis": "^2.6.5"
+    "express-session": "^1.15.1",
+    "redis": "^2.6.5",
+    "secure-route": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.5.3",

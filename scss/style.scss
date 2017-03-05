@@ -252,6 +252,7 @@ header {
         margin-left: 25px;
         letter-spacing: 3.5px;
         color: white;
+        text-align: left;
         @include font-size(12px);
         @include transition(all 0.1s ease);
 

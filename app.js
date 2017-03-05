@@ -1,9 +1,11 @@
 // set variables for environment
-var express = require('express');
-var app = express();
-var path = require('path');
+const express = require('express');
+const app = express();
+const path = require('path');
 const fs = require('fs');
-var bodyParser = require("body-parser");
+const session = require('express-session');
+const bodyParser = require("body-parser");
+
 if (process.env.REDISTOGO_URL) {
   var rtg   = require("url").parse(process.env.REDISTOGO_URL);
   var client = require("redis").createClient(rtg.port, rtg.hostname);
@@ -19,19 +21,70 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // instruct express to server up static assets
 app.use(express.static('public'));
+app.use(session({ secret: 'big booty', cookie: { maxAge: 1000 }}))
+
+// Secure JSON Path
+function checkAuth (req, res, next) {
+  if (req.url === '/secured-rsvps' && (!req.session || !req.session.authenticated)) {
+    res.redirect('/rsvps');
+    return;
+  }
+  next();
+}
+
+app.use(checkAuth);
 
 // set routes
 app.get('/', function(req, res) {
   res.render('index');
 });
 
-app.get('/super-secret-path', function(req, res) {
+app.get('/rsvps', function(req, res) {
+  res.render('rsvps');
+});
+
+app.get('/logout', function(req, res) {
+  req.session.authenticated = false;
+  res.redirect('/');
+});
+
+app.post('/rsvps', function(req, res) {
+  if (req.body.username && (req.body.username === 'admin' || req.body.username === 'mom') && req.body.password && (req.body.password === 'lovelyfirecracker' || req.body.password === 'T3nniswedding')) {
+    req.session.authenticated = true;
+    res.redirect('/secured-rsvps');
+  } else {
+    res.redirect('/rsvps');
+  }
+});
+
+app.get('/secured-rsvps', function(req, res) {
   client.lrange("rsvps", 0, -1, function(err, rsvps){
-    console.log(rsvps);
     var jsonRsvps = [];
+    var jsonRsvpsCount = {};
+    jsonRsvpsCount.attending = [];
+    jsonRsvpsCount.not_attending = [];
     for (var i = 0; i < rsvps.length; i++) {
-      jsonRsvps.push(JSON.parse(rsvps[i]));
+      var rsvp = JSON.parse(rsvps[i])
+      jsonRsvps.push(rsvp);
+
+      if (rsvp.going == "yes") {
+        if (jsonRsvpsCount.total_attending) {
+          jsonRsvpsCount.total_attending = parseInt(jsonRsvpsCount.total_attending) + parseInt(rsvp.attending) + 1 + "";
+        } else {
+          jsonRsvpsCount.total_attending = parseInt(rsvp.attending) + 1 + "";
+        }
+        jsonRsvpsCount.attending.push(rsvp.name);
+      } else {
+        if (jsonRsvpsCount.total_not_attending) {
+          jsonRsvpsCount.total_not_attending = parseInt(jsonRsvpsCount.total_not_attending) + 1 + "";
+        } else {
+          jsonRsvpsCount.total_not_attending = '1';
+        }
+        jsonRsvpsCount.not_attending.push(rsvp.name);
+      }
     }
+
+    jsonRsvps.push(jsonRsvpsCount);
     res.send(jsonRsvps);
   });
 });

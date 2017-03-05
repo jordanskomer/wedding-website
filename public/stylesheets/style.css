@@ -196,6 +196,7 @@ header {
       margin-left: 25px;
       letter-spacing: 3.5px;
       color: white;
+      text-align: left;
       font-size: 12px;
       font-size: 0.75rem;
       transition: all 0.1s ease; }
